@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import Topbar from './Topbar.astro';
+import { getLanding } from '../content';
+import { useTranslations, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const c = getLanding(locale);
+---
+
+<Base locale={locale} title={t('meta.title')} description={t('meta.description')}>
+  <Topbar locale={locale} wordmark={c.wordmark} />
+  <main id="main">
+    <header class="hero">
+      <h1>{c.brand}</h1>
+      <p class="slogan">{c.slogan}</p>
+    </header>
+  </main>
+</Base>
+
+<style>
+  .hero {
+    max-width: 44rem;
+    margin-inline: auto;
+    padding: var(--space-6) var(--page-pad) var(--space-5);
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    letter-spacing: -0.02em;
+  }
+
+  .slogan {
+    font-style: italic;
+    color: var(--color-muted);
+    margin: var(--space-2) 0 0;
+  }
+</style>

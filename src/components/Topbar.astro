@@ -1,0 +1,60 @@
+---
+import LocaleToggle from './LocaleToggle.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import type { Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  wordmark: string;
+}
+
+const { locale, wordmark } = Astro.props;
+const [name, tld] = wordmark.split(/(?=\.)/); // "sugarrush" + ".dev"
+---
+
+<div class="topbar">
+  <a class="mark" href="#main">{name}<span class="mark-dot" aria-hidden="true">{tld}</span></a>
+  <div class="toggles">
+    <LocaleToggle locale={locale} />
+    <ThemeToggle locale={locale} />
+  </div>
+</div>
+
+<style>
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--topbar-height);
+    padding: var(--space-1) var(--page-pad);
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .mark {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: var(--text-lg);
+    color: var(--color-text);
+    text-decoration: none;
+    white-space: nowrap;
+
+    & .mark-dot {
+      color: var(--color-dot-raspberry);
+    }
+
+    @media (max-width: 40rem) {
+      font-size: var(--text-base);
+    }
+  }
+
+  .toggles {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+</style>
