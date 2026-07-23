@@ -7,8 +7,7 @@ interface Props {
 }
 
 const { locale } = Astro.props;
-const f = getLanding(locale).footer;
-const slogan = getLanding(locale).slogan;
+const { footer: f, slogan } = getLanding(locale);
 ---
 
 <footer>
