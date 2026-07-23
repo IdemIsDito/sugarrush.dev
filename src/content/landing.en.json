@@ -1,0 +1,35 @@
+{
+  "brand": "Sugar Rush Development",
+  "wordmark": "sugarrush.dev",
+  "slogan": "coding with the speed of sweet",
+  "scan": {
+    "heading": "The scan",
+    "intro": "I look at how your teams build today — the codebase, the practices, the architecture — and name the risks that tend to bite later. Then you decide: fix them yourself, or I fix them with you, working across your teams and leading by example.",
+    "steps": [
+      {
+        "title": "Scan",
+        "body": "I go through how your teams build and name the risks, plainly."
+      },
+      {
+        "title": "Report",
+        "body": "You get a clear, prioritized picture — what matters, and why."
+      },
+      {
+        "title": "Fix",
+        "body": "You fix it, or I fix it with your teams, leading by example."
+      }
+    ]
+  },
+  "cta": {
+    "email": "jeroen@sugarrush.dev",
+    "emailLabel": "Email me about a scan",
+    "personLabel": "Jeroen, the person behind it",
+    "personHref": "https://jeroenwever.com/"
+  },
+  "footer": {
+    "builtWith": "This site was built with agents",
+    "sourceLabel": "source on GitHub",
+    "sourceHref": "https://github.com/IdemIsDito/sugarrush.dev",
+    "operatesAs": "Sugar Rush Development B.V."
+  }
+}
