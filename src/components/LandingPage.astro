@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Topbar from './Topbar.astro';
+import Footer from './Footer.astro';
 import { getLanding } from '../content';
 import { useTranslations, type Locale } from '../i18n';
 
@@ -20,14 +21,34 @@ const c = getLanding(locale);
       <h1>{c.brand}</h1>
       <p class="slogan">{c.slogan}</p>
     </header>
+
+    <section class="scan" aria-labelledby="scan-heading">
+      <h2 id="scan-heading">{c.scan.heading}</h2>
+      <p class="intro">{c.scan.intro}</p>
+      <ol class="steps">
+        {
+          c.scan.steps.map((step) => (
+            <li>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="cta">
+        <a class="cta-primary" href={`mailto:${c.cta.email}`}>{c.cta.emailLabel}</a>
+        <a class="cta-secondary" href={c.cta.personHref}>{c.cta.personLabel} <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
   </main>
+  <Footer locale={locale} />
 </Base>
 
 <style>
   .hero {
     max-width: 44rem;
     margin-inline: auto;
-    padding: var(--space-6) var(--page-pad) var(--space-5);
+    padding: var(--space-6) var(--page-pad) var(--space-4);
   }
 
   h1 {
@@ -39,5 +60,102 @@ const c = getLanding(locale);
     font-style: italic;
     color: var(--color-muted);
     margin: var(--space-2) 0 0;
+  }
+
+  .scan {
+    max-width: 44rem;
+    margin-inline: auto;
+    padding: var(--space-2) var(--page-pad) var(--space-5);
+  }
+
+  .scan h2 {
+    font-size: var(--text-xl);
+  }
+
+  .intro {
+    margin: var(--space-3) 0 0;
+    max-width: 40rem;
+  }
+
+  .steps {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: repeat(3, 1fr);
+    margin: var(--space-5) 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+
+    @media (max-width: 40rem) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .steps li {
+    counter-increment: step;
+    padding: var(--space-3);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+  }
+
+  .steps h3 {
+    font-size: var(--text-lg);
+
+    &::before {
+      content: counter(step);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5em;
+      height: 1.5em;
+      margin-right: var(--space-2);
+      font-size: var(--text-sm);
+      color: var(--color-bg);
+      background: var(--color-accent);
+      border-radius: 50%;
+    }
+  }
+
+  .steps p {
+    margin: var(--space-2) 0 0;
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-4);
+    margin-top: var(--space-5);
+  }
+
+  .cta-primary {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: var(--space-2) var(--space-4);
+    font-weight: 600;
+    color: var(--color-bg);
+    background: var(--color-accent);
+    border-radius: 999px;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  .cta-secondary {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-text);
+    text-decoration-color: var(--color-border);
+
+    &:hover {
+      color: var(--color-accent);
+    }
   }
 </style>
