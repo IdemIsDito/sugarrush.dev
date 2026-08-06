@@ -1,26 +1,13 @@
 import { z } from 'zod';
 
 export const landingSchema = z.object({
-  brand: z.string().min(1), // "Sugar Rush Development"
+  brand: z.string().min(1), // "Sugar Rush Development" — the hero kicker
   wordmark: z.string().min(1), // "sugarrush.dev"
-  slogan: z.string().min(1), // "coding with the speed of sweet"
-  scan: z.object({
-    heading: z.string().min(1),
-    intro: z.string().min(1),
-    steps: z
-      .array(
-        z.object({
-          title: z.string().min(1),
-          body: z.string().min(1),
-        })
-      )
-      .length(3),
-  }),
-  cta: z.object({
-    email: z.email(),
-    emailLabel: z.string().min(1),
-    personLabel: z.string().min(1),
-    personHref: z.url(),
+  slogan: z.string().min(1), // "coding with the speed of sweet" — the hero headline
+  intro: z.string().min(1), // the line under the headline: what the name is
+  resume: z.object({
+    label: z.string().min(1),
+    href: z.url(),
   }),
   footer: z.object({
     builtWith: z.string().min(1),

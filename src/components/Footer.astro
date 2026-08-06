@@ -11,45 +11,23 @@ const { footer: f, slogan } = getLanding(locale);
 ---
 
 <footer>
-  <p class="srd">
-    {f.builtWith} — <a href={f.sourceHref}>{f.sourceLabel}</a>.
-    <strong>{f.operatesAs}</strong> — <em>{slogan}</em>
-    <span class="sprinkles" aria-hidden="true">
-      <span class="dot" style="--dot: var(--color-dot-raspberry)"></span>
-      <span class="dot" style="--dot: var(--color-dot-grape)"></span>
-      <span class="dot" style="--dot: var(--color-dot-blueberry)"></span>
-    </span>
+  <p class="mono">
+    {f.builtWith} — <a href={f.sourceHref}>{f.sourceLabel}</a>. <span class="op">{f.operatesAs}</span>
+     — {slogan}
   </p>
 </footer>
 
 <style>
   footer {
-    max-width: 44rem;
-    margin-inline: auto;
     padding: var(--space-4) var(--page-pad) var(--space-5);
-    border-top: 1px solid var(--color-border);
   }
 
-  .srd {
+  p {
     margin: 0;
-    font-size: var(--text-sm);
-    color: var(--color-muted);
   }
 
-  .sprinkles {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-1);
-    margin-left: var(--space-1);
-
-    & .dot:nth-child(2) {
-      width: 0.4em;
-      height: 0.4em;
-    }
-
-    & .dot:nth-child(3) {
-      width: 0.3em;
-      height: 0.3em;
-    }
+  /* Accent text: plum on Icing, raspberry on Liquorice. */
+  .op {
+    color: var(--color-accent);
   }
 </style>

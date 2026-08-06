@@ -15,13 +15,33 @@ test('theme override persists across reloads and beats system scheme', async () 
   const page = await context.newPage();
   await page.goto(origin + '/');
 
-  // Force dark via the toggle's select.
-  await page.selectOption('#theme-select', 'dark');
+  // Theme lives in the sheet, never in the header bar — open it first.
+  await page.click('[data-menu-open]');
+  await page.click('[data-theme-opt="dark"]');
   expect(await page.evaluate(() => document.documentElement.dataset.theme)).toBe('dark');
 
   // Reload: the pre-paint inline script must reapply the stored override.
   await page.reload();
   expect(await page.evaluate(() => document.documentElement.dataset.theme)).toBe('dark');
+
+  // And the sheet must reopen showing dark as the checked pill.
+  await page.click('[data-menu-open]');
+  expect(await page.isChecked('#theme-dark')).toBe(true);
+
+  await context.close();
+});
+
+test('returning to System clears the override', async () => {
+  const context = await browser.newContext({ colorScheme: 'light' });
+  const page = await context.newPage();
+  await page.goto(origin + '/');
+
+  await page.click('[data-menu-open]');
+  await page.click('[data-theme-opt="dark"]');
+  await page.click('[data-theme-opt="system"]');
+
+  expect(await page.evaluate(() => document.documentElement.dataset.theme)).toBeUndefined();
+  expect(await page.evaluate(() => localStorage.getItem('theme'))).toBeNull();
 
   await context.close();
 });

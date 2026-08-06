@@ -13,28 +13,23 @@ describe('landing content', () => {
     expect(result.success).toBe(false);
   });
 
-  test('schema rejects a malformed contact email', () => {
+  test('schema rejects a malformed resume URL', () => {
     const valid = getLanding('en');
     expect(
       landingSchema.safeParse({
         ...valid,
-        cta: { ...valid.cta, email: 'not-an-email' },
+        resume: { ...valid.resume, href: 'not-a-url' },
       }).success
     ).toBe(false);
   });
 
-  test('both locales expose exactly three scan steps', () => {
-    expect(getLanding('en').scan.steps.length).toBe(3);
-    expect(getLanding('nl').scan.steps.length).toBe(3);
+  test('the headline is the slogan in both locales', () => {
+    expect(getLanding('en').slogan).toBe('coding with the speed of sweet');
+    expect(getLanding('nl').slogan).toBe('coding with the speed of sweet');
   });
 
-  test('contact email is jeroen@sugarrush.dev in both locales', () => {
-    expect(getLanding('en').cta.email).toBe('jeroen@sugarrush.dev');
-    expect(getLanding('nl').cta.email).toBe('jeroen@sugarrush.dev');
-  });
-
-  test('jeroenwever.com link is locale-matched', () => {
-    expect(getLanding('en').cta.personHref).toBe('https://jeroenwever.com/');
-    expect(getLanding('nl').cta.personHref).toBe('https://jeroenwever.com/nl/');
+  test('resume link is locale-matched', () => {
+    expect(getLanding('en').resume.href).toBe('https://jeroenwever.com/');
+    expect(getLanding('nl').resume.href).toBe('https://jeroenwever.com/nl/');
   });
 });

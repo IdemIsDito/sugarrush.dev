@@ -26,26 +26,27 @@ describe('landing pages', () => {
     }
   });
 
+  test('the headline is the slogan, with the brand as its kicker', () => {
+    for (const html of [en, nl]) {
+      expect(html).toMatch(/<h1[^>]*>coding with the speed of sweet<\/h1>/);
+    }
+  });
+
   test('language toggle links to the other locale', () => {
     expect(en).toContain('href="/nl/"');
     expect(nl).toContain('href="/"');
   });
 
-  test('the scan heading and three steps render', () => {
-    expect(en).toContain('The scan');
-    expect(nl).toContain('De scan');
+  test('theme and language live in the sheet, not the header bar', () => {
     for (const html of [en, nl]) {
-      expect((html.match(/<h3/g) ?? []).length).toBe(3);
+      expect(html).toContain('id="menu-sheet"');
+      expect(html).toContain('id="theme-dark"');
+      // The band crosses every page: three stripes, always rendered.
+      expect((html.match(/class="band"/g) ?? []).length).toBe(1);
     }
   });
 
-  test('email CTA points at jeroen@sugarrush.dev in both locales', () => {
-    for (const html of [en, nl]) {
-      expect(html).toContain('mailto:jeroen@sugarrush.dev');
-    }
-  });
-
-  test('person CTA links to the locale-matched jeroenwever.com', () => {
+  test('resume link points at the locale-matched jeroenwever.com', () => {
     expect(en).toContain('href="https://jeroenwever.com/"');
     expect(nl).toContain('href="https://jeroenwever.com/nl/"');
   });

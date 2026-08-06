@@ -1,6 +1,13 @@
 export default {
   'nav.skip': 'Naar inhoud',
   'locale.switch': 'English',
+  /* Read from the *other* locale's dictionary, so the link speaks its target's language. */
+  'locale.altPage': 'Deze pagina is er ook in het Nederlands',
+  'locale.legend': 'Taal',
+  'locale.en': 'English',
+  'locale.nl': 'Nederlands',
+  'menu.open': 'Menu',
+  'menu.close': 'Sluiten',
   'theme.legend': 'Thema',
   'theme.system': 'Systeem',
   'theme.light': 'Licht',
