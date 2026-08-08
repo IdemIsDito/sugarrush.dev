@@ -14,6 +14,11 @@ export const landingSchema = z.object({
     sourceLabel: z.string().min(1),
     sourceHref: z.url(),
     operatesAs: z.string().min(1),
+    /* Statutory company details. PLACEHOLDERS — replace with the real
+       registration numbers before this site goes live. */
+    kvk: z.string().min(1),
+    btw: z.string().min(1),
+    country: z.string().min(1),
   }),
 });
 

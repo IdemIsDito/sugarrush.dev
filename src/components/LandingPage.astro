@@ -14,6 +14,12 @@ const t = useTranslations(locale);
 const c = getLanding(locale);
 const other = altLocale(locale);
 const tOther = useTranslations(other);
+
+/* The payoff's last word carries the accent — raspberry on Liquorice, plum on
+   Icing, where raspberry is fill-only. */
+const words = c.slogan.split(' ');
+const sloganHead = words.slice(0, -1).join(' ');
+const sloganAccent = words.at(-1);
 ---
 
 <Base locale={locale} title={t('meta.title')} description={t('meta.description')}>
@@ -25,16 +31,18 @@ const tOther = useTranslations(other);
       resumeLabel={c.resume.label}
     />
 
-    <main id="main">
-      <p class="kicker">{c.brand}</p>
-      <h1>{c.slogan}</h1>
+    <main id="main" class="shell">
+      <p class="kicker kicker-brand">{c.brand}</p>
+      <h1>{sloganHead} <span class="accent">{sloganAccent}</span></h1>
       <p class="intro">{c.intro}</p>
-      <div class="links">
-        <a href={c.resume.href}>{c.resume.label} <span aria-hidden="true">→</span></a>
+      <div class="actions">
+        <a class="btn" href={c.resume.href}>{c.resume.label} <span aria-hidden="true">→</span></a>
+      </div>
+      <p class="alt-page">
         <a href={localePath(other)} hreflang={other} lang={other}>
           {tOther('locale.altPage')} <span aria-hidden="true">→</span>
         </a>
-      </div>
+      </p>
     </main>
 
     <Footer locale={locale} />
@@ -60,28 +68,55 @@ const tOther = useTranslations(other);
   }
 
   h1 {
-    /* Headlines cap at 16ch — NL runs ~20% longer and must not reflow past it. */
-    max-width: 16ch;
+    /* Headlines cap at 15ch — NL runs ~20% longer and must not reflow past it. */
+    max-width: 15ch;
     margin: 0;
     font-size: var(--text-display);
     font-weight: 700;
-    letter-spacing: var(--track-display);
-    line-height: 0.98;
+    letter-spacing: -0.05em;
+    line-height: 0.94;
+  }
+
+  .accent {
+    color: var(--color-accent);
   }
 
   .intro {
-    max-width: 42ch;
+    max-width: 50ch;
     margin: var(--space-2) 0 0;
     color: var(--color-muted);
     font-size: var(--text-lg);
   }
 
-  .links {
+  .actions {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-2);
-    margin-top: var(--space-3);
+    gap: var(--space-3);
+    padding-top: var(--space-2);
+  }
+
+  /* The primary action is the one raspberry fill; its text is always Liquorice. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    padding-inline: 23px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-on-raspberry);
+    background: var(--color-raspberry);
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    transition: background-color var(--motion) ease;
+
+    &:hover {
+      background: var(--color-raspberry-hover);
+      color: var(--color-on-raspberry);
+    }
+  }
+
+  .alt-page {
+    margin: var(--space-2) 0 0;
     font-size: var(--text-sm);
   }
 </style>

@@ -13,11 +13,13 @@ interface Props {
 const { locale, wordmark, resumeHref, resumeLabel } = Astro.props;
 const other = altLocale(locale);
 const tOther = useTranslations(other);
+/* "sugarrush" + ".dev" — the tail carries the raspberry. */
+const [lead = '', accent = ''] = wordmark.split(/(?=\.)/);
 ---
 
-<header class="topbar">
-  <Wordmark wordmark={wordmark} href="#main" />
-  <MenuSheet locale={locale} wordmark={wordmark}>
+<header class="topbar shell">
+  <Wordmark lead={lead} accent={accent} href="#main" />
+  <MenuSheet locale={locale} lead={lead} accent={accent}>
     <div class="sheet-links">
       <a href={resumeHref}>{resumeLabel} <span aria-hidden="true">→</span></a>
       <a href={localePath(other)} hreflang={other} lang={other}>

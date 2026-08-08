@@ -11,6 +11,9 @@
     "builtWith": "This site was built with agents",
     "sourceLabel": "source on GitHub",
     "sourceHref": "https://github.com/IdemIsDito/sugarrush.dev",
-    "operatesAs": "Sugar Rush Development B.V."
+    "operatesAs": "Sugar Rush Development B.V.",
+    "kvk": "KvK 00000000",
+    "btw": "BTW NL000000000B00",
+    "country": "Netherlands"
   }
 }

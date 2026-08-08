@@ -26,9 +26,28 @@ describe('landing pages', () => {
     }
   });
 
-  test('the headline is the slogan, with the brand as its kicker', () => {
+  test('the headline is the slogan, with its last word accented', () => {
     for (const html of [en, nl]) {
-      expect(html).toMatch(/<h1[^>]*>coding with the speed of sweet<\/h1>/);
+      expect(html).toMatch(/<h1[^>]*>coding with the speed of\s*<span class="accent"[^>]*>sweet<\/span><\/h1>/);
+    }
+  });
+
+  test('the brand kicker carries the brand yellow', () => {
+    for (const html of [en, nl]) {
+      expect(html).toMatch(/class="kicker kicker-brand"[^>]*>Sugar Rush Development</);
+    }
+  });
+
+  test('the statutory footer line renders', () => {
+    for (const html of [en, nl]) {
+      expect(html).toContain('KvK');
+      expect(html).toContain('BTW');
+    }
+  });
+
+  test('content is boxed by the shared shell', () => {
+    for (const html of [en, nl]) {
+      expect(html).toMatch(/<main id="main" class="shell"/);
     }
   });
 
