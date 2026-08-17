@@ -1,60 +1,49 @@
 ---
-import LocaleToggle from './LocaleToggle.astro';
-import ThemeToggle from './ThemeToggle.astro';
-import type { Locale } from '../i18n';
+import Wordmark from './Wordmark.astro';
+import MenuSheet from './MenuSheet.astro';
+import { useTranslations, altLocale, localePath, type Locale } from '../i18n';
 
 interface Props {
   locale: Locale;
   wordmark: string;
+  resumeHref: string;
+  resumeLabel: string;
 }
 
-const { locale, wordmark } = Astro.props;
-const [name, tld] = wordmark.split(/(?=\.)/); // "sugarrush" + ".dev"
+const { locale, wordmark, resumeHref, resumeLabel } = Astro.props;
+const other = altLocale(locale);
+const tOther = useTranslations(other);
+/* "sugarrush" + ".dev" — the tail carries the raspberry. */
+const [lead = '', accent = ''] = wordmark.split(/(?=\.)/);
 ---
 
-<div class="topbar">
-  <a class="mark" href="#main">{name}<span class="mark-dot" aria-hidden="true">{tld}</span></a>
-  <div class="toggles">
-    <LocaleToggle locale={locale} />
-    <ThemeToggle locale={locale} />
-  </div>
-</div>
+<header class="topbar shell">
+  <Wordmark lead={lead} accent={accent} href="#main" />
+  <MenuSheet locale={locale} lead={lead} accent={accent}>
+    <div class="sheet-links">
+      <a href={resumeHref}>{resumeLabel} <span aria-hidden="true">→</span></a>
+      <a href={localePath(other)} hreflang={other} lang={other}>
+        {tOther('locale.altPage')} <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </MenuSheet>
+</header>
 
 <style>
   .topbar {
-    position: sticky;
-    top: 0;
-    z-index: 5;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--space-3);
     min-height: var(--topbar-height);
-    padding: var(--space-1) var(--page-pad);
-    background: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-4) var(--page-pad) 0;
   }
 
-  .mark {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: var(--text-lg);
-    color: var(--color-text);
-    text-decoration: none;
-    white-space: nowrap;
-
-    & .mark-dot {
-      color: var(--color-dot-raspberry);
-    }
-
-    @media (max-width: 40rem) {
-      font-size: var(--text-base);
-    }
-  }
-
-  .toggles {
+  .sheet-links {
     display: flex;
-    align-items: center;
-    gap: var(--space-2);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
   }
 </style>

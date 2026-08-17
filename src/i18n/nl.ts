@@ -1,11 +1,18 @@
 export default {
   'nav.skip': 'Naar inhoud',
   'locale.switch': 'English',
+  /* Read from the *other* locale's dictionary, so the link speaks its target's language. */
+  'locale.altPage': 'Deze pagina is er ook in het Nederlands',
+  'locale.legend': 'Taal',
+  'locale.en': 'English',
+  'locale.nl': 'Nederlands',
+  'menu.open': 'Menu',
+  'menu.close': 'Sluiten',
   'theme.legend': 'Thema',
   'theme.system': 'Systeem',
   'theme.light': 'Licht',
   'theme.dark': 'Donker',
-  'meta.title': 'Sugar Rush Development — scans van engineeringrisico’s',
+  'meta.title': 'Sugar Rush Development — coding with the speed of sweet',
   'meta.description':
-    'Sugar Rush Development B.V. — ik scan hoe jullie teams bouwen, benoem de risico’s en help ze op te lossen, of los ze samen met jullie op. Van Jeroen Wever.',
+    'De naam waaronder Jeroen Wever werkt — freelance staff-level front-end engineering, bijna 20 jaar webproducten bouwen die mensen echt gebruiken.',
 } as const;
