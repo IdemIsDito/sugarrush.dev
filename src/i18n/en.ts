@@ -12,7 +12,7 @@ export default {
   'theme.system': 'System',
   'theme.light': 'Light',
   'theme.dark': 'Dark',
-  'meta.title': 'Sugar Rush Development — engineering risk scans',
+  'meta.title': 'Sugar Rush Development — coding with the speed of sweet',
   'meta.description':
-    'Sugar Rush Development B.V. — I scan how your teams build, name the risks, and help you fix them, or fix them with you. Run by Jeroen Wever.',
+    'The name Jeroen Wever operates under — freelance staff-level front-end engineering, almost 20 years of shipping web products people actually use.',
 } as const;

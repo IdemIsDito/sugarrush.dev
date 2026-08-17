@@ -14,10 +14,11 @@ export const landingSchema = z.object({
     sourceLabel: z.string().min(1),
     sourceHref: z.url(),
     operatesAs: z.string().min(1),
-    /* Statutory company details. PLACEHOLDERS — replace with the real
-       registration numbers before this site goes live. */
-    kvk: z.string().min(1),
-    btw: z.string().min(1),
+    /* Statutory company details. Shape-checked so a typo or a placeholder
+       cannot reach a published page: KvK is 8 digits, BTW is the Dutch
+       NL<9 digits>B<2 digits> format. */
+    kvk: z.string().regex(/^KvK \d{8}$/),
+    btw: z.string().regex(/^BTW NL\d{9}B\d{2}$/),
     country: z.string().min(1),
   }),
 });
