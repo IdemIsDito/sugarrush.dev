@@ -10,7 +10,8 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/404'),
+      // /og/ renders the social card only — noindex scaffolding, not a page.
+      filter: (page) => !page.includes('/404') && !page.includes('/og/'),
     }),
   ],
 });

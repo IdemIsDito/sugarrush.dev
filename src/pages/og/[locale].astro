@@ -1,0 +1,140 @@
+---
+import '@fontsource-variable/space-grotesk';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/600.css';
+import { getLanding } from '../../content';
+import { locales, type Locale } from '../../i18n';
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const c = getLanding(locale);
+const [name, tld] = c.wordmark.split(/(?=\.)/);
+
+/* Same treatment as the hero: the payoff's last word carries the accent. */
+const words = c.slogan.split(' ');
+const sloganHead = words.slice(0, -1).join(' ');
+const sloganAccent = words.at(-1);
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>og-image source</title>
+    <style>
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+      /* Liquorice ground — the theme the payoff was designed against. */
+      body {
+        width: 1200px;
+        height: 630px;
+        background: #120e13;
+        color: #fbf7f3;
+        font-family: 'Space Grotesk Variable', Helvetica, Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 80px;
+        position: relative;
+        overflow: hidden;
+      }
+      /* The band: three stripes at 16°, right-anchored, widest outermost. */
+      .band span {
+        position: absolute;
+        top: -80px;
+        bottom: -80px;
+        transform: skewX(-16deg);
+      }
+      .b1 {
+        right: -40px;
+        width: 200px;
+        background: oklch(0.3 0.05 320);
+      }
+      .b2 {
+        right: 210px;
+        width: 44px;
+        background: oklch(0.36 0.06 320);
+      }
+      .b3 {
+        right: 266px;
+        width: 16px;
+        background: oklch(0.26 0.04 320);
+      }
+      .content {
+        position: relative;
+      }
+      .mark {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 40px;
+      }
+      .bars {
+        display: flex;
+        gap: 5px;
+      }
+      .bars i {
+        width: 12px;
+        height: 40px;
+        border-radius: 3px;
+        transform: skewX(-16deg);
+      }
+      .bars i:nth-child(1) {
+        background: oklch(0.68 0.21 20);
+      }
+      .bars i:nth-child(2) {
+        background: oklch(0.88 0.13 85);
+      }
+      .bars i:nth-child(3) {
+        background: oklch(0.51 0.1 205);
+      }
+      .type {
+        font-size: 30px;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+      }
+      /* A logotype carries no contrast requirement. */
+      .tld {
+        color: oklch(0.68 0.21 20);
+      }
+      .kicker {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: oklch(0.88 0.13 85);
+        margin-bottom: 24px;
+      }
+      h1 {
+        font-size: 82px;
+        line-height: 0.94;
+        font-weight: 700;
+        letter-spacing: -0.05em;
+        max-width: 15ch;
+      }
+      .accent {
+        color: oklch(0.68 0.21 20);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="band">
+      <span class="b1"></span><span class="b2"></span><span class="b3"></span>
+    </div>
+    <div class="content">
+      <div class="mark">
+        <span class="bars"><i></i><i></i><i></i></span>
+        <span class="type">{name}<span class="tld">{tld}</span></span>
+      </div>
+      <p class="kicker">{c.brand}</p>
+      <h1>{sloganHead} <span class="accent">{sloganAccent}</span></h1>
+    </div>
+  </body>
+</html>
