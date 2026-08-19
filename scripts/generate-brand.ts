@@ -30,11 +30,13 @@ const BASE = `
   .bars i:nth-child(3){background:oklch(0.51 0.10 205)}
   .tld{color:oklch(0.68 0.21 20)}`;
 
-const band = (w: number, m: number, g: number) => `
+/** Right-anchored as on the sites, or left-anchored on assets whose content
+ *  has to sit right of an overlay. */
+const band = (w: number, m: number, g: number, side: 'right' | 'left' = 'right') => `
   <div class="band">
-    <span style="right:${-m}px;width:${w}px;background:oklch(0.30 0.05 320)"></span>
-    <span style="right:${w - m + g}px;width:${Math.round(w * 0.22)}px;background:oklch(0.36 0.06 320)"></span>
-    <span style="right:${w - m + g + Math.round(w * 0.22) + g}px;width:${Math.round(w * 0.08)}px;background:oklch(0.26 0.04 320)"></span>
+    <span style="${side}:${-m}px;width:${w}px;background:oklch(0.30 0.05 320)"></span>
+    <span style="${side}:${w - m + g}px;width:${Math.round(w * 0.22)}px;background:oklch(0.36 0.06 320)"></span>
+    <span style="${side}:${w - m + g + Math.round(w * 0.22) + g}px;width:${Math.round(w * 0.08)}px;background:oklch(0.26 0.04 320)"></span>
   </div>`;
 
 const mark = (barW: number, barH: number, gap: number, type: number) => `
@@ -49,15 +51,16 @@ const mark = (barW: number, barH: number, gap: number, type: number) => `
 
 const assets = [
   {
-    // The company logo overlaps the lower left of a page cover, so the mark
-    // starts well clear of it.
+    // The page logo sits over the lower left, so content is right-aligned and
+    // the band moves left.
     name: 'linkedin-company-cover',
     w: 1128,
     h: 191,
-    html: `${band(200, 40, 18)}
-      <div style="position:relative;padding-left:260px;display:flex;align-items:center;gap:28px">
-        ${mark(11, 36, 5, 30)}
+    html: `${band(200, 40, 18, 'left')}
+      <div style="position:relative;margin-left:auto;padding-right:60px;display:flex;
+                  align-items:center;gap:28px">
         <span class="kicker" style="font-size:14px">coding with the speed of sweet</span>
+        ${mark(11, 36, 5, 30)}
       </div>`,
   },
   {
