@@ -2,14 +2,14 @@
   "brand": "Sugar Rush Development",
   "wordmark": "sugarrush.dev",
   "slogan": "coding with the speed of sweet",
-  "intro": "The name Jeroen Wever operates under — freelance staff-level front-end engineering, almost 20 years of shipping web products people actually use.",
+  "intro": "The name Jeroen Wever operates under: freelance staff-level front-end engineering, almost 20 years of shipping web products people actually use.",
   "resume": {
     "label": "See the resume",
     "href": "https://jeroenwever.com/"
   },
   "footer": {
     "builtWith": "This site was built with agents",
-    "sourceLabel": "source on GitHub",
+    "sourceLabel": "Source on GitHub",
     "sourceHref": "https://github.com/IdemIsDito/sugarrush.dev",
     "operatesAs": "Sugar Rush Development B.V.",
     "kvk": "KvK 93231474",

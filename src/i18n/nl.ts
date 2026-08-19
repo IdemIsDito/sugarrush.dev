@@ -12,7 +12,7 @@ export default {
   'theme.system': 'Systeem',
   'theme.light': 'Licht',
   'theme.dark': 'Donker',
-  'meta.title': 'Sugar Rush Development — coding with the speed of sweet',
+  'meta.title': 'Sugar Rush Development · coding with the speed of sweet',
   'meta.description':
-    'De naam waaronder Jeroen Wever werkt — freelance staff-level front-end engineering, bijna 20 jaar webproducten bouwen die mensen echt gebruiken.',
+    'De naam waaronder Jeroen Wever werkt: freelance staff-level front-end engineering, bijna 20 jaar webproducten bouwen die mensen echt gebruiken.',
 } as const;
