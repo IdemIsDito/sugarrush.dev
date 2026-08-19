@@ -9,7 +9,8 @@ const browser = await chromium.launch();
 afterAll(async () => {
   await browser.close();
   server.stop();
-});
+  // CI runners tear a browser down well past bun's 5s default hook timeout.
+}, 30_000);
 
 /*
  * WCAG 1.4.3 exempts text that is part of a logo or brand name from the

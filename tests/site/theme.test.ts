@@ -8,7 +8,8 @@ const browser = await chromium.launch();
 afterAll(async () => {
   await browser.close();
   server.stop();
-});
+  // CI runners tear a browser down well past bun's 5s default hook timeout.
+}, 30_000);
 
 test('theme override persists across reloads and beats system scheme', async () => {
   const context = await browser.newContext({ colorScheme: 'light' });
